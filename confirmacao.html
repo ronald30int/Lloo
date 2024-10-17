@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pedido Confirmado!</h1>
+    <p>Seu pedido foi recebido com sucesso.</p>
+    <p><strong>Produto:</strong> <span id="produto"></span></p>
+    <p><strong>Preço:</strong> R$ <span id="preco"></span></p>
+    <p><strong>Nome:</strong> <span id="nome"></span></p>
+    <p><strong>Endereço de Entrega:</strong> <span id="endereco"></span></p>
+    
+    <form action="envia_email.php" method="POST">
+        <input type="hidden" name="produto" id="produto_input">
+        <input type="hidden" name="preco" id="preco_input">
+        <input type="hidden" name="nome" id="nome_input">
+        <input type="hidden" name="endereco" id="endereco_input">
+        <button type="submit">Enviar Pedido por E-mail</button>
+    </form>
+
+    <script>
+        // Pegando os parâmetros da URL para exibir a confirmação do pedido
+        const params = new URLSearchParams(window.location.search);
+        const produto = params.get('produto');
+        const preco = params.get('preco');
+        const nome = params.get('nome');
+        const endereco = params.get('endereco');
+        
+        document.getElementById('produto').textContent = produto;
+        document.getElementById('preco').textContent = preco;
+        document.getElementById('nome').textContent = nome;
+        document.getElementById('endereco').textContent = endereco;
+
+        // Passando os valores para o formulário
+        document.getElementById('produto_input').value = produto;
+        document.getElementById('preco_input').value = preco;
+        document.getElementById('nome_input').value = nome;
+        document.getElementById('endereco_input').value = endereco;
+    </script>
+</body>
+</html>
