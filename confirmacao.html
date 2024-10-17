@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pedido Confirmado!</h1>
+    <p>Seu pedido foi recebido com sucesso.</p>
+    <p><strong>Produto:</strong> <span id="produto"></span></p>
+    <p><strong>Preço:</strong> R$ <span id="preco"></span></p>
+    <p><strong>Nome:</strong> <span id="nome"></span></p>
+    <p><strong>Endereço de Entrega:</strong> <span id="endereco"></span></p>
+    
+    <p><a href="#">Clique aqui para pagar</a></p>
+
+    <script>
+        // Pegando os parâmetros da URL para exibir a confirmação do pedido
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('produto').textContent = params.get('produto');
+        document.getElementById('preco').textContent = params.get('preco');
+        document.getElementById('nome').textContent = params.get('nome');
+        document.getElementById('endereco').textContent = params.get('endereco');
+    </script>
+</body>
+</html>
