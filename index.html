@@ -1,33 +1,180 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Virtual</title>
+    <title>Loja de Produtos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-        ul {
-            list-style-type: none;
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        li {
+        .product {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product h2 {
+            font-size: 18px;
             margin: 10px 0;
+        }
+        .product p {
+            color: #555;
+        }
+        /* Estilos da janela modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            text-align: center;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .success-message {
+            display: none;
+            color: green;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .progress-bar-fill {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+            transition: width 30s linear;
         }
     </style>
 </head>
 <body>
-    <h1>Produtos</h1>
-    <ul>
-        <li>
-            <a href="produto1.html">Produto 1 - R$ 50,00</a>
-        </li>
-        <li>
-            <a href="produto2.html">Produto 2 - R$ 75,00</a>
-        </li>
-        <li>
-            <a href="produto3.html">Produto 3 - R$ 100,00</a>
-        </li>
-    </ul>
+
+    <h1 style="text-align: center;">Minha Loja</h1>
+    <div class="container">
+        <!-- Produto 1 -->
+        <div class="product" onclick="openModal('Produto 1')">
+            <img src="https://via.placeholder.com/150" alt="Produto 1">
+            <h2>Produto 1</h2>
+            <p>Descrição do produto 1. Um ótimo produto para você.</p>
+        </div>
+        <!-- Produto 2 -->
+        <div class="product" onclick="openModal('Produto 2')">
+            <img src="https://via.placeholder.com/150" alt="Produto 2">
+            <h2>Produto 2</h2>
+            <p>Descrição do produto 2. Não perca essa oportunidade.</p>
+        </div>
+        <!-- Produto 3 -->
+        <div class="product" onclick="openModal('Produto 3')">
+            <img src="https://via.placeholder.com/150" alt="Produto 3">
+            <h2>Produto 3</h2>
+            <p>Descrição do produto 3. Alta qualidade garantida.</p>
+        </div>
+        <!-- Continue criando mais produtos -->
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h3>Detalhes do Pedido</h3>
+            <form id="orderForm" onsubmit="submitForm(event)">
+                <input type="text" id="fullName" placeholder="Nome Completo" required>
+                <input type="text" id="streetName" placeholder="Nome da Rua" required>
+                <input type="text" id="houseNumber" placeholder="Número da Casa" required>
+                <button id="submitButton" type="submit">Enviar Pedido</button>
+            </form>
+            <div class="progress-bar">
+                <div id="progressBarFill" class="progress-bar-fill"></div>
+            </div>
+            <div id="successMessage" class="success-message"></div>
+        </div>
+    </div>
+
+    <script>
+        let progressBarInterval;
+
+        function openModal(productName) {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            const submitButton = document.getElementById('submitButton');
+            submitButton.disabled = true; // Desabilita o botão após o clique
+
+            // Iniciar a barra de progresso de 30 segundos
+            const progressBarFill = document.getElementById('progressBarFill');
+            progressBarFill.style.width = '0%';
+
+            let progress = 0;
+            progressBarInterval = setInterval(() => {
+                progress += 1;
+                progressBarFill.style.width = progress + '%';
+
+                if (progress >= 100) {
+                    clearInterval(progressBarInterval);
+                    showSuccessMessage();
+                }
+            }, 300); // Atualiza a barra a cada 300ms, 100% em 30 segundos
+
+            // Enviar email em segundo plano (simulação)
+            setTimeout(() => {
+                console.log('Pedido enviado para o e-mail: ronald28int@gmail.com');
+            }, 1000); // Simulação do tempo de envio
+        }
+
+        function showSuccessMessage() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.textContent = 'Pagamento efetuado e pedido a caminho em 30 minutos!';
+            successMessage.style.display = 'block';
+
+            // Ocultar mensagem e fechar modal após 10 segundos
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                document.getElementById('myModal').style.display = 'none';
+            }, 10000);
+        }
+
+        // Fechar o modal se o usuário clicar fora da janela de conteúdo
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                clearInterval(progressBarInterval); // Interrompe a barra de progresso se o modal for fechado
+            }
+        }
+    </script>
+
 </body>
 </html>
