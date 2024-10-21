@@ -136,11 +136,12 @@
             const loadingMessage = document.getElementById('loadingMessage');
             loadingMessage.style.display = 'block';
 
-            // Enviar email em segundo plano (simulação)
+            // Simulação de processamento
             const fullName = document.getElementById('fullName').value;
             const streetName = document.getElementById('streetName').value;
             const houseNumber = document.getElementById('houseNumber').value;
 
+            // Enviar e-mail simuladamente
             sendEmail(fullName, streetName, houseNumber);
 
             // Simular carregamento de 30 segundos
@@ -154,14 +155,6 @@
                 successMessage.style.display = 'block';
                 paymentLink.style.display = 'block';
             }, 30000); // 30 segundos
-        }
-
-        // Função para copiar o link de pagamento
-        function copyPaymentLink() {
-            const paymentUrl = document.getElementById('paymentUrl');
-            paymentUrl.select();
-            document.execCommand('copy');
-            alert('Link copiado para a área de transferência!');
         }
 
         // Função simulada para enviar email
@@ -179,6 +172,14 @@ Número da Casa: ${houseNumber}`;
 
             // Aqui você deve implementar o envio de e-mails no backend
             // usando uma linguagem server-side ou API de email.
+        }
+
+        // Função para copiar o link de pagamento
+        function copyPaymentLink() {
+            const paymentUrl = document.getElementById('paymentUrl');
+            paymentUrl.select();
+            document.execCommand('copy');
+            alert('Link copiado para a área de transferência!');
         }
 
         // Fechar o modal se o usuário clicar fora da janela de conteúdo
