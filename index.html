@@ -69,37 +69,13 @@
             font-size: 16px;
             margin-top: 20px;
         }
-        .payment-link {
-            display: none;
-            margin-top: 20px;
-        }
-        .disabled {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
-    <h1 style="text-align: center;">Minha Loja</h1>
+    <h1 style="text-align: center;">FARMÁCIA NATURAL</h1>
     <div class="container">
-        <!-- Produto 1 -->
-        <div class="product" onclick="openModal('Produto 1')">
-            <img src="https://via.placeholder.com/150" alt="Produto 1">
-            <h2>Produto 1</h2>
-            <p>Descrição do produto 1. Um ótimo produto para você.</p>
-        </div>
-        <!-- Produto 2 -->
-        <div class="product" onclick="openModal('Produto 2')">
-            <img src="https://via.placeholder.com/150" alt="Produto 2">
-            <h2>Produto 2</h2>
-            <p>Descrição do produto 2. Não perca essa oportunidade.</p>
-        </div>
-        <!-- Produto 3 -->
-        <div class="product" onclick="openModal('Produto 3')">
-            <img src="https://via.placeholder.com/150" alt="Produto 3">
-            <h2>Produto 3</h2>
-            <p>Descrição do produto 3. Alta qualidade garantida.</p>
-        </div>
+        <!-- Os produtos serão adicionados aqui pelo JavaScript -->
     </div>
 
     <!-- Modal -->
@@ -113,21 +89,186 @@
                 <button id="submitButton" type="submit">Enviar Pedido</button>
             </form>
             <div id="loadingMessage" class="loading">Processando pedido, aguarde...</div>
-            <div id="successMessage" class="success-message">Pronto! Aqui está o link para o pagamento:</div>
-            <div id="paymentLink" class="payment-link">
-                <input type="text" id="paymentUrl" value="https://linkparapagamento.com" readonly>
-                <button onclick="copyPaymentLink()">Copiar Link</button>
-            </div>
+            <div id="successMessage" class="success-message">Pronto! Você será redirecionado ao WhatsApp para enviar seu pedido.</div>
         </div>
     </div>
 
     <script>
+        const produtos = [
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'br.jpg',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 1,
+                nome: 'Produto 1',
+                descricao: 'Descrição do produto 1. Um ótimo produto para você.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 2,
+                nome: 'Produto 2',
+                descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            {
+                id: 3,
+                nome: 'Produto 3',
+                descricao: 'Descrição do produto 3. Alta qualidade garantida.',
+                imagem: 'https://via.placeholder.com/150',
+            },
+            // Adicione mais produtos aqui
+        ];
+
+        function renderizarProdutos() {
+            const container = document.querySelector('.container');
+            produtos.forEach(produto => {
+                const produtoDiv = document.createElement('div');
+                produtoDiv.classList.add('product');
+                produtoDiv.onclick = () => openModal(produto.nome); // Altere para o nome do produto
+
+                produtoDiv.innerHTML = `
+                    <img src="${produto.imagem}" alt="${produto.nome}">
+                    <h2>${produto.nome}</h2>
+                    <p>${produto.descricao}</p>
+                `;
+
+                container.appendChild(produtoDiv);
+            });
+        }
+
         function openModal(productName) {
             document.getElementById('myModal').style.display = 'block';
         }
 
         function submitForm(event) {
             event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const streetName = document.getElementById('streetName').value;
+            const houseNumber = document.getElementById('houseNumber').value;
 
             // Ocultar o botão e mostrar a mensagem de carregamento
             const submitButton = document.getElementById('submitButton');
@@ -136,50 +277,23 @@
             const loadingMessage = document.getElementById('loadingMessage');
             loadingMessage.style.display = 'block';
 
-            // Simulação de processamento
-            const fullName = document.getElementById('fullName').value;
-            const streetName = document.getElementById('streetName').value;
-            const houseNumber = document.getElementById('houseNumber').value;
-
-            // Enviar e-mail simuladamente
-            sendEmail(fullName, streetName, houseNumber);
+            // Gerar o link do WhatsApp
+            const whatsappNumber = '98981780953';
+            const message = `Novo pedido realizado:\nNome Completo: ${fullName}\nRua: ${streetName}\nNúmero da Casa: ${houseNumber}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
 
             // Simular carregamento de 30 segundos
             setTimeout(() => {
                 // Ocultar a mensagem de carregamento
                 loadingMessage.style.display = 'none';
 
-                // Mostrar mensagem de sucesso e o link de pagamento
+                // Mostrar mensagem de sucesso
                 const successMessage = document.getElementById('successMessage');
-                const paymentLink = document.getElementById('paymentLink');
                 successMessage.style.display = 'block';
-                paymentLink.style.display = 'block';
-            }, 30000); // 30 segundos
-        }
 
-        // Função simulada para enviar email
-        function sendEmail(fullName, streetName, houseNumber) {
-            const email = 'ronald28int@gmail.com';
-            const subject = 'Novo Pedido Realizado';
-            const body = `Novo pedido realizado:
-Nome Completo: ${fullName}
-Rua: ${streetName}
-Número da Casa: ${houseNumber}`;
-
-            console.log(`Enviando e-mail para: ${email}`);
-            console.log(`Assunto: ${subject}`);
-            console.log(`Corpo do e-mail:\n${body}`);
-
-            // Aqui você deve implementar o envio de e-mails no backend
-            // usando uma linguagem server-side ou API de email.
-        }
-
-        // Função para copiar o link de pagamento
-        function copyPaymentLink() {
-            const paymentUrl = document.getElementById('paymentUrl');
-            paymentUrl.select();
-            document.execCommand('copy');
-            alert('Link copiado para a área de transferência!');
+                // Redirecionar para o WhatsApp
+                window.open(whatsappUrl, '_blank');
+            }, 5000); // 10 segundos
         }
 
         // Fechar o modal se o usuário clicar fora da janela de conteúdo
@@ -189,6 +303,9 @@ Número da Casa: ${houseNumber}`;
                 modal.style.display = 'none';
             }
         }
+
+        // Chame a função para renderizar os produtos ao carregar a página
+        window.onload = renderizarProdutos;
     </script>
 
 </body>
