@@ -63,18 +63,18 @@
             font-size: 18px;
             margin-top: 20px;
         }
-        .progress-bar {
-            width: 100%;
-            background-color: #f3f3f3;
-            border-radius: 5px;
-            overflow: hidden;
+        .loading {
+            display: none;
+            color: blue;
+            font-size: 16px;
             margin-top: 20px;
         }
-        .progress-bar-fill {
-            width: 0;
-            height: 20px;
-            background-color: #4caf50;
-            transition: width 30s linear;
+        .payment-link {
+            display: none;
+            margin-top: 20px;
+        }
+        .disabled {
+            display: none;
         }
     </style>
 </head>
@@ -100,7 +100,6 @@
             <h2>Produto 3</h2>
             <p>Descrição do produto 3. Alta qualidade garantida.</p>
         </div>
-        <!-- Continue criando mais produtos -->
     </div>
 
     <!-- Modal -->
@@ -113,16 +112,16 @@
                 <input type="text" id="houseNumber" placeholder="Número da Casa" required>
                 <button id="submitButton" type="submit">Enviar Pedido</button>
             </form>
-            <div class="progress-bar">
-                <div id="progressBarFill" class="progress-bar-fill"></div>
+            <div id="loadingMessage" class="loading">Processando pedido, aguarde...</div>
+            <div id="successMessage" class="success-message">Pronto! Aqui está o link para o pagamento:</div>
+            <div id="paymentLink" class="payment-link">
+                <input type="text" id="paymentUrl" value="https://linkparapagamento.com" readonly>
+                <button onclick="copyPaymentLink()">Copiar Link</button>
             </div>
-            <div id="successMessage" class="success-message"></div>
         </div>
     </div>
 
     <script>
-        let progressBarInterval;
-
         function openModal(productName) {
             document.getElementById('myModal').style.display = 'block';
         }
@@ -130,40 +129,56 @@
         function submitForm(event) {
             event.preventDefault();
 
+            // Ocultar o botão e mostrar a mensagem de carregamento
             const submitButton = document.getElementById('submitButton');
-            submitButton.disabled = true; // Desabilita o botão após o clique
+            submitButton.style.display = 'none';
 
-            // Iniciar a barra de progresso de 30 segundos
-            const progressBarFill = document.getElementById('progressBarFill');
-            progressBarFill.style.width = '0%';
-
-            let progress = 0;
-            progressBarInterval = setInterval(() => {
-                progress += 1;
-                progressBarFill.style.width = progress + '%';
-
-                if (progress >= 100) {
-                    clearInterval(progressBarInterval);
-                    showSuccessMessage();
-                }
-            }, 300); // Atualiza a barra a cada 300ms, 100% em 30 segundos
+            const loadingMessage = document.getElementById('loadingMessage');
+            loadingMessage.style.display = 'block';
 
             // Enviar email em segundo plano (simulação)
+            const fullName = document.getElementById('fullName').value;
+            const streetName = document.getElementById('streetName').value;
+            const houseNumber = document.getElementById('houseNumber').value;
+
+            sendEmail(fullName, streetName, houseNumber);
+
+            // Simular carregamento de 30 segundos
             setTimeout(() => {
-                console.log('Pedido enviado para o e-mail: ronald28int@gmail.com');
-            }, 1000); // Simulação do tempo de envio
+                // Ocultar a mensagem de carregamento
+                loadingMessage.style.display = 'none';
+
+                // Mostrar mensagem de sucesso e o link de pagamento
+                const successMessage = document.getElementById('successMessage');
+                const paymentLink = document.getElementById('paymentLink');
+                successMessage.style.display = 'block';
+                paymentLink.style.display = 'block';
+            }, 30000); // 30 segundos
         }
 
-        function showSuccessMessage() {
-            const successMessage = document.getElementById('successMessage');
-            successMessage.textContent = 'Pagamento efetuado e pedido a caminho em 30 minutos!';
-            successMessage.style.display = 'block';
+        // Função para copiar o link de pagamento
+        function copyPaymentLink() {
+            const paymentUrl = document.getElementById('paymentUrl');
+            paymentUrl.select();
+            document.execCommand('copy');
+            alert('Link copiado para a área de transferência!');
+        }
 
-            // Ocultar mensagem e fechar modal após 10 segundos
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-                document.getElementById('myModal').style.display = 'none';
-            }, 10000);
+        // Função simulada para enviar email
+        function sendEmail(fullName, streetName, houseNumber) {
+            const email = 'ronald28int@gmail.com';
+            const subject = 'Novo Pedido Realizado';
+            const body = `Novo pedido realizado:
+Nome Completo: ${fullName}
+Rua: ${streetName}
+Número da Casa: ${houseNumber}`;
+
+            console.log(`Enviando e-mail para: ${email}`);
+            console.log(`Assunto: ${subject}`);
+            console.log(`Corpo do e-mail:\n${body}`);
+
+            // Aqui você deve implementar o envio de e-mails no backend
+            // usando uma linguagem server-side ou API de email.
         }
 
         // Fechar o modal se o usuário clicar fora da janela de conteúdo
@@ -171,7 +186,6 @@
             const modal = document.getElementById('myModal');
             if (event.target === modal) {
                 modal.style.display = 'none';
-                clearInterval(progressBarInterval); // Interrompe a barra de progresso se o modal for fechado
             }
         }
     </script>
