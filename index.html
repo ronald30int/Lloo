@@ -114,128 +114,128 @@
                 imagem: 'br0.jpg',
             },
             {
-                id: 1,
+                id: 4,
                 nome: 'Produto 1',
                 descricao: 'Descrição do produto 1. Um ótimo produto para você.',
                 imagem: 'br1.jpg',
             },
             {
-                id: 2,
+                id: 5,
                 nome: 'Produto 2',
                 descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
                 imagem: 'br2.jpg',
             },
             {
-                id: 3,
+                id: 6,
                 nome: 'Produto 3',
                 descricao: 'Descrição do produto 3. Alta qualidade garantida.',
                 imagem: 'br3.jpg',
             },
             {
-                id: 1,
+                id: 7,
                 nome: 'Produto 1',
                 descricao: 'Descrição do produto 1. Um ótimo produto para você.',
                 imagem: 'br4.jpg',
             },
             {
-                id: 2,
+                id: 8,
                 nome: 'Produto 2',
                 descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
                 imagem: 'br5.jpg',
             },
             {
-                id: 3,
+                id: 9,
                 nome: 'Produto 3',
                 descricao: 'Descrição do produto 3. Alta qualidade garantida.',
                 imagem: 'br6.jpg',
             },
             {
-                id: 1,
+                id: 10,
                 nome: 'Produto 1',
                 descricao: 'Descrição do produto 1. Um ótimo produto para você.',
                 imagem: 'br7.jpg',
             },
             {
-                id: 2,
+                id: 11,
                 nome: 'Produto 2',
                 descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
                 imagem: 'br8.jpg',
             },
             {
-                id: 3,
+                id: 12,
                 nome: 'Produto 3',
                 descricao: 'Descrição do produto 3. Alta qualidade garantida.',
                 imagem: 'br9.jpg',
             },
             {
-                id: 1,
+                id: 13,
                 nome: 'Produto 1',
                 descricao: 'Descrição do produto 1. Um ótimo produto para você.',
                 imagem: 'br10.jpg',
             },
             {
-                id: 2,
+                id: 14,
                 nome: 'Produto 2',
                 descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
                 imagem: 'br11.jpg',
             },
             {
-                id: 3,
+                id: 15,
                 nome: 'Produto 3',
                 descricao: 'Descrição do produto 3. Alta qualidade garantida.',
                 imagem: 'br12.jpg',
             },
             {
-                id: 1,
+                id: 16,
                 nome: 'Produto 1',
                 descricao: 'Descrição do produto 1. Um ótimo produto para você.',
                 imagem: 'br13.jpg',
             },
             {
-                id: 2,
+                id: 17,
                 nome: 'Produto 2',
                 descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
                 imagem: 'br14.jpg',
             },
             {
-                id: 3,
+                id: 18,
                 nome: 'Produto 3',
                 descricao: 'Descrição do produto 3. Alta qualidade garantida.',
                 imagem: 'br15.jpg',
             },
             {
-                id: 1,
+                id: 19,
                 nome: 'Produto 1',
                 descricao: 'Descrição do produto 1. Um ótimo produto para você.',
                 imagem: 'br16.jpg',
             },
             {
-                id: 2,
+                id: 20,
                 nome: 'Produto 2',
                 descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
                 imagem: 'br17.jpg',
             },
             {
-                id: 3,
+                id: 21,
                 nome: 'Produto 3',
                 descricao: 'Descrição do produto 3. Alta qualidade garantida.',
                 imagem: 'br18.jpg',
             },
             {
-                id: 1,
+                id: 22,
                 nome: 'Produto 1',
                 descricao: 'Descrição do produto 1. Um ótimo produto para você.',
                 imagem: 'br19.jpg',
             },
             {
-                id: 2,
+                id: 23,
                 nome: 'Produto 2',
                 descricao: 'Descrição do produto 2. Não perca essa oportunidade.',
                 imagem: 'br20.jpg',
             },
             {
-                id: 3,
-                nome: 'Produto 3',
+                id: 24,
+                nome: 'Produto 24',
                 descricao: 'Descrição do produto 3. Alta qualidade garantida.',
                 imagem: 'br21.jpg',
             },
@@ -247,7 +247,7 @@
             produtos.forEach(produto => {
                 const produtoDiv = document.createElement('div');
                 produtoDiv.classList.add('product');
-                produtoDiv.onclick = () => openModal(produto.nome); // Altere para o nome do produto
+                produtoDiv.onclick = () => openModal(produto.nome);
 
                 produtoDiv.innerHTML = `
                     <img src="${produto.imagem}" alt="${produto.nome}">
@@ -260,6 +260,7 @@
         }
 
         function openModal(productName) {
+            produtoSelecionado = productName; // Armazena o nome do produto selecionado
             document.getElementById('myModal').style.display = 'block';
         }
 
@@ -277,10 +278,10 @@
 
             // Gerar o link do WhatsApp
             const whatsappNumber = '98981780953';
-            const message = `Novo pedido realizado:\nNome: ${fullName}`:\nProduto: ${produtoSelecionado}`;
+            const message = `Novo pedido realizado:\nNome: ${fullName}\nProduto: ${produtoSelecionado}`;
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
 
-            // Simular carregamento de 30 segundos
+            // Simular carregamento de 5 segundos
             setTimeout(() => {
                 // Ocultar a mensagem de carregamento
                 loadingMessage.style.display = 'none';
@@ -291,7 +292,7 @@
 
                 // Redirecionar para o WhatsApp
                 window.open(whatsappUrl, '_blank');
-            }, 5000); // 10 segundos
+            }, 5000); // 5 segundos
         }
 
         // Fechar o modal se o usuário clicar fora da janela de conteúdo
