@@ -266,8 +266,6 @@
             event.preventDefault();
 
             const fullName = document.getElementById('fullName').value;
-            const streetName = document.getElementById('streetName').value;
-            const houseNumber = document.getElementById('houseNumber').value;
 
             // Ocultar o botão e mostrar a mensagem de carregamento
             const submitButton = document.getElementById('submitButton');
@@ -278,7 +276,7 @@
 
             // Gerar o link do WhatsApp
             const whatsappNumber = '98981780953';
-            const message = `Novo pedido realizado:\nNome Completo: ${fullName}\nRua: ${streetName}\nNúmero da Casa: ${houseNumber}`;
+            const message = `Novo pedido realizado:\nNome: ${fullName}`;
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
 
             // Simular carregamento de 30 segundos
